@@ -1,8 +1,12 @@
 from typing import Optional
 from fastapi import FastAPI
 from pydantic import BaseModel
+from sqlalchemy import create_mock_engine
+from blog.database import engine
+from blog import models
 
 app = FastAPI()
+models.Base.metadata.create_all(bind=engine)
 
 class Item(BaseModel):
     name: str
